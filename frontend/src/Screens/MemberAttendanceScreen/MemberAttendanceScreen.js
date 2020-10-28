@@ -22,14 +22,32 @@ const MemberAttendanceScreen = () => {
     //can update state which updates
   };
 
-  const handleUpdateLastName = (e, id) => {
-    console.log(id);
+  //might need to repeat this for every table column
+  const handleUpdate = (e, id) => {
+    const value = e.target.value;
+
     const filterById = members.filter((member) => member._id === id);
     if (filterById[0]._id === id) {
-      setLName(e.target.value);
-      filterById[0].lastName = e.target.value;
+      switch (e.target.name) {
+        case "firstName":
+          filterById[0].firstName = value;
+          break;
+        case "lastName":
+          filterById[0].lastName = value;
+          break;
+        case "gradeYear":
+          filterById[0].gradeYear = value;
+          break;
+        case "workshop":
+          filterById[0].workshop = value;
+          break;
+        case "timesAttended":
+          filterById[0].timesAttended = value;
+          break;
+        default:
+          return;
+      }
     }
-    console.log(filterById[0].lastName);
   };
 
   return (
@@ -42,7 +60,6 @@ const MemberAttendanceScreen = () => {
             <th>Year</th>
             <th>Workshop</th>
             <th>Times Attended</th>
-            <th>Add/Subtract</th>
           </tr>
 
           {members.map((member, i) => {
@@ -50,39 +67,41 @@ const MemberAttendanceScreen = () => {
               <tr key={i}>
                 <td style={{ width: "20%" }}>
                   <TableInput
-                    value={member.firstName}
+                    defaultValue={member.firstName}
                     key={member._id}
-                    handleChange={(e) => setFName(e.target.value)}
+                    name="firstName"
+                    handleChange={(e) => handleUpdate(e, member._id)}
                   />
                 </td>
                 <td style={{ width: "20%" }}>
                   <TableInput
                     defaultValue={member.lastName}
                     key={member._id}
-                    handleChange={(e) => handleUpdateLastName(e, member._id)}
+                    name="lastName"
+                    handleChange={(e) => handleUpdate(e, member._id)}
                   />
                 </td>
                 <td style={{ width: "10%" }}>
                   <TableInput
-                    value={member.gradeYear}
-                    handleChange={(e) => setGradeYear(e.target.value)}
+                    name="gradeYear"
+                    defaultValue={member.gradeYear}
+                    handleChange={(e) => handleUpdate(e, member._id)}
                   />
                 </td>
                 <td style={{ width: "25%" }}>
                   <TableInput
-                    value={member.workshop}
-                    handleChange={(e) => setCurrentWorkshop(e.target.value)}
+                    name="workshop"
+                    defaultValue={member.workshop}
+                    handleChange={(e) => handleUpdate(e, member._id)}
                   />
                 </td>
                 <td style={{ width: "15%" }}>
                   <TableInput
-                    value={member.timesAttended}
-                    handleChange={(e) => setTimesAttended(e.target.value)}
+                    name="timesAttended"
+                    type="number"
+                    defaultValue={member.timesAttended}
+                    handleChange={(e) => handleUpdate(e, member._id)}
                   />
-                </td>
-
-                <td>
-                  <button>+</button> <button>-</button>
                 </td>
               </tr>
             );
