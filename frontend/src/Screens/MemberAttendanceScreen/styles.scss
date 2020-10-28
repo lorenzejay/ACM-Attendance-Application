@@ -1,0 +1,31 @@
+.member-attendance-screen {
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 5%;
+  table {
+    width: 70%;
+    height: 75%;
+    background-color: #f1f1c1;
+
+    td {
+      width: 55%;
+      input {
+        width: 100%;
+        background-color: inherit;
+      }
+    }
+  }
+}
+
+tr:nth-child(even) {
+  background: #ccc;
+}
+tr:nth-child(odd) {
+  background-color: #fff;
+}
+table th {
+  color: white;
+  background-color: rgb(28, 28, 30);
+}

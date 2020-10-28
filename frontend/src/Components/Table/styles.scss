@@ -1,0 +1,14 @@
+table,
+th,
+td {
+  border: 2px solid #333333;
+  border-collapse: collapse;
+}
+table {
+  border-radius: 15px;
+  box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.2);
+  th,
+  td {
+    padding: 15px;
+  }
+}
