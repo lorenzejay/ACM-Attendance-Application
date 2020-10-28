@@ -5,27 +5,12 @@ import members from "../../dummyData";
 import TableInput from "../../Components/TableInput";
 
 const MemberAttendanceScreen = () => {
-  const [fName, setFName] = useState("");
-  const [lName, setLName] = useState("");
-  const [gradeYear, setGradeYear] = useState("");
-  const [workshop, setCurrentWorkshop] = useState("");
-  const [timesAttended, setTimesAttended] = useState(0);
-
   /*once redux state or whatever state management you use is established with the db
   all these values can be updated after save button is clicked.
   */
-  // useEffect(() => {
-  //if state is being grabbed from redux, im sure there is a way to update
-  // }, [fName, lName, gradeYear, workshop, timesAttended]);
 
-  const updateHandleChange = () => {
-    //can update state which updates
-  };
-
-  //might need to repeat this for every table column
   const handleUpdate = (e, id) => {
     const value = e.target.value;
-
     const filterById = members.filter((member) => member._id === id);
     if (filterById[0]._id === id) {
       switch (e.target.name) {
@@ -48,6 +33,8 @@ const MemberAttendanceScreen = () => {
           return;
       }
     }
+    //from here we can update the db of members directly
+    //update values through redux
   };
 
   return (

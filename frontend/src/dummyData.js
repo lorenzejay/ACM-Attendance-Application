@@ -69,7 +69,7 @@ const members = [
     lastName: "Wilson",
     gradeYear: "Soph.",
     workshop: "Discord Bot",
-    timesAttended: 5,
+    timesAttended: 2,
   },
   {
     _id: 10,
