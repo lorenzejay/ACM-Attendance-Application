@@ -3,11 +3,43 @@ import "./styles.scss";
 import TableContainer from "../../Components/Table/index";
 import members from "../../dummyData";
 import TableInput from "../../Components/TableInput";
-
+import Pagination from "react-bootstrap/Pagination";
 const MemberAttendanceScreen = () => {
   /*once redux state or whatever state management you use is established with the db
   all these values can be updated after save button is clicked.
   */
+
+  const memberPages = parseInt(members.length / 10);
+
+  //pagnation
+  const [active, setActive] = useState(1);
+  let items = [];
+  for (let number = 1; number <= memberPages; number++) {
+    items.push(
+      <Pagination.Item key={number} active={number === active} onClick={() => setActive(number)}>
+        {number}
+      </Pagination.Item>
+    );
+  }
+
+  const pagination = (
+    <div>
+      <Pagination>{items}</Pagination>
+    </div>
+  );
+
+  const generateRange = (min, max, step) => {
+    let arr = [];
+    for (let i = min; i < max; i += step) {
+      arr.push(i);
+    }
+    return arr;
+  };
+  console.log(generateRange(active * 10 - 10, active * 10, 1));
+  const paginateBy10 = members.filter(
+    (member, index) => index > active * 10 - 10 && index < active * 10
+  );
+  // console.log(paginateBy10);
 
   const handleUpdate = (e, id) => {
     const value = e.target.value;
@@ -49,7 +81,7 @@ const MemberAttendanceScreen = () => {
             <th>Times Attended</th>
           </tr>
 
-          {members.map((member, i) => {
+          {paginateBy10.map((member, i) => {
             return (
               <tr key={i}>
                 <td style={{ width: "20%" }}>
@@ -95,6 +127,7 @@ const MemberAttendanceScreen = () => {
           })}
         </tbody>
       </TableContainer>
+      {pagination}
     </div>
   );
 };
