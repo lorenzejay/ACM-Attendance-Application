@@ -4,7 +4,10 @@ import TableContainer from "../../Components/Table/index";
 import members from "../../dummyData";
 import TableInput from "../../Components/TableInput";
 import Pagination from "react-bootstrap/Pagination";
+import Input from "../../Components/Input";
+
 const MemberAttendanceScreen = () => {
+  const [timesAttended, setTimesAttended] = useState();
   /*once redux state or whatever state management you use is established with the db
   all these values can be updated after save button is clicked.
   */
@@ -39,38 +42,45 @@ const MemberAttendanceScreen = () => {
   const paginateBy10 = members.filter(
     (member, index) => index > active * 10 - 10 && index < active * 10
   );
-  // console.log(paginateBy10);
 
-  const handleUpdate = (e, id) => {
-    const value = e.target.value;
-    const filterById = members.filter((member) => member._id === id);
-    if (filterById[0]._id === id) {
-      switch (e.target.name) {
-        case "firstName":
-          filterById[0].firstName = value;
-          break;
-        case "lastName":
-          filterById[0].lastName = value;
-          break;
-        case "gradeYear":
-          filterById[0].gradeYear = value;
-          break;
-        case "workshop":
-          filterById[0].workshop = value;
-          break;
-        case "timesAttended":
-          filterById[0].timesAttended = value;
-          break;
-        default:
-          return;
+  // const handleUpdate = (e, id) => {
+  //   const value = e.target.value;
+  //   const filterById = members.filter((member) => member._id === id);
+  //   if (e.target.name === "timesAttended") {
+  //     filterById[0].timesAttended = value;
+  //   }
+
+  //   //from here we can update the db of members directly
+  //   //update values through redux
+  // };
+  console.log(timesAttended);
+  //search input
+  const searchMemberByFirstName = (e) => {
+    let input, filter, table, tr, td, i, txtValue;
+    input = e.target;
+    filter = e.target.value.toUpperCase();
+    table = document.querySelector("table");
+    tr = table.getElementsByTagName("tr");
+    console.log(tr);
+
+    for (i = 0; i < tr.length; i++) {
+      td = tr[i].getElementsByTagName("td")[0];
+      if (td) {
+        txtValue = td.textContent || td.innerText;
+        if (txtValue.toUpperCase().indexOf(filter) > -1) {
+          tr[i].style.display = "";
+        } else {
+          tr[i].style.display = "none";
+        }
       }
     }
-    //from here we can update the db of members directly
-    //update values through redux
   };
 
   return (
     <div className="member-attendance-screen">
+      <div className="search-input">
+        <Input placeholder="search for member" handleInput={searchMemberByFirstName} />
+      </div>
       <TableContainer>
         <tbody>
           <tr>
@@ -84,42 +94,16 @@ const MemberAttendanceScreen = () => {
           {paginateBy10.map((member, i) => {
             return (
               <tr key={i}>
-                <td style={{ width: "20%" }}>
-                  <TableInput
-                    defaultValue={member.firstName}
-                    key={member._id}
-                    name="firstName"
-                    handleChange={(e) => handleUpdate(e, member._id)}
-                  />
-                </td>
-                <td style={{ width: "20%" }}>
-                  <TableInput
-                    defaultValue={member.lastName}
-                    key={member._id}
-                    name="lastName"
-                    handleChange={(e) => handleUpdate(e, member._id)}
-                  />
-                </td>
-                <td style={{ width: "10%" }}>
-                  <TableInput
-                    name="gradeYear"
-                    defaultValue={member.gradeYear}
-                    handleChange={(e) => handleUpdate(e, member._id)}
-                  />
-                </td>
-                <td style={{ width: "25%" }}>
-                  <TableInput
-                    name="workshop"
-                    defaultValue={member.workshop}
-                    handleChange={(e) => handleUpdate(e, member._id)}
-                  />
-                </td>
+                <td style={{ width: "20%" }}>{member.firstName}</td>
+                <td style={{ width: "20%" }}>{member.lastName}</td>
+                <td style={{ width: "10%" }}>{member.gradeYear}</td>
+                <td style={{ width: "25%" }}>{member.workshop}</td>
                 <td style={{ width: "15%" }}>
                   <TableInput
                     name="timesAttended"
                     type="number"
                     defaultValue={member.timesAttended}
-                    handleChange={(e) => handleUpdate(e, member._id)}
+                    handleChange={(e) => setTimesAttended(e.target.value)}
                   />
                 </td>
               </tr>
