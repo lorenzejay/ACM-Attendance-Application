@@ -43,17 +43,6 @@ const MemberAttendanceScreen = () => {
     (member, index) => index > active * 10 - 10 && index < active * 10
   );
 
-  // const handleUpdate = (e, id) => {
-  //   const value = e.target.value;
-  //   const filterById = members.filter((member) => member._id === id);
-  //   if (e.target.name === "timesAttended") {
-  //     filterById[0].timesAttended = value;
-  //   }
-
-  //   //from here we can update the db of members directly
-  //   //update values through redux
-  // };
-  console.log(timesAttended);
   //search input
   const searchMemberByFirstName = (e) => {
     let input, filter, table, tr, td, i, txtValue;
