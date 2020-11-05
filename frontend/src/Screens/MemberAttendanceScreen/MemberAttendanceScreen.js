@@ -31,14 +31,6 @@ const MemberAttendanceScreen = () => {
     </div>
   );
 
-  const generateRange = (min, max, step) => {
-    let arr = [];
-    for (let i = min; i < max; i += step) {
-      arr.push(i);
-    }
-    return arr;
-  };
-  console.log(generateRange(active * 10 - 10, active * 10, 1));
   const paginateBy10 = members.filter(
     (member, index) => index > active * 10 - 10 && index < active * 10
   );
@@ -50,7 +42,6 @@ const MemberAttendanceScreen = () => {
     filter = e.target.value.toUpperCase();
     table = document.querySelector("table");
     tr = table.getElementsByTagName("tr");
-    console.log(tr);
 
     for (i = 0; i < tr.length; i++) {
       td = tr[i].getElementsByTagName("td")[0];
