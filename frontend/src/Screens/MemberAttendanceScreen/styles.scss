@@ -10,8 +10,8 @@
     align-self: flex-start;
   }
   table {
-    width: 100%;
     margin-bottom: 5vh;
+    border: none;
     td {
       width: 55%;
       input {
@@ -31,4 +31,20 @@ tr:nth-child(odd) {
 table th {
   color: white;
   background-color: #0073a0;
+}
+
+@media screen and (max-width: 600px) {
+  .member-attendance-screen {
+    width: 100%;
+    select {
+      margin: 5vh;
+    }
+    table {
+      width: 50%;
+      align-self: flex-start;
+    }
+    input {
+      width: 60vw;
+    }
+  }
 }
