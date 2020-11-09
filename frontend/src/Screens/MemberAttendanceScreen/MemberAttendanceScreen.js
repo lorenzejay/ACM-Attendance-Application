@@ -11,9 +11,6 @@ const MemberAttendanceScreen = () => {
   const [timesAttended, setTimesAttended] = useState();
   const [filteredByGrade, setFilteredByGrade] = useState();
   const [active, setActive] = useState(1);
-  // const [paginateBy10, setPaginateBy10] = useState(
-  //   members.filter((member, index) => index > active * 10 - 10 && index < active * 10)
-  // );
   /*once redux state or whatever state management you use is established with the db
   all these values can be updated after save button is clicked.
   */
@@ -120,41 +117,6 @@ const MemberAttendanceScreen = () => {
               </td>
             </tr>
           ))}
-          {/* {filteredByGrade
-            ? paginateBy10.map((member, i) => (
-                <tr key={i}>
-                  <td style={{ width: "20%" }}>{member.firstName}</td>
-                  <td style={{ width: "20%" }}>{member.lastName}</td>
-                  <td style={{ width: "10%" }}>{member.gradeYear}</td>
-                  <td style={{ width: "25%" }}>{member.workshop}</td>
-                  <td style={{ width: "15%" }}>
-                    <TableInput
-                      name="timesAttended"
-                      type="number"
-                      defaultValue={member.timesAttended}
-                      handleChange={(e) => setTimesAttended(e.target.value)}
-                    />
-                  </td>
-                </tr>
-              ))
-            : paginateBy10.map((member, i) => {
-                return (
-                  <tr key={i}>
-                    <td style={{ width: "20%" }}>{member.firstName}</td>
-                    <td style={{ width: "20%" }}>{member.lastName}</td>
-                    <td style={{ width: "10%" }}>{member.gradeYear}</td>
-                    <td style={{ width: "25%" }}>{member.workshop}</td>
-                    <td style={{ width: "15%" }}>
-                      <TableInput
-                        name="timesAttended"
-                        type="number"
-                        defaultValue={member.timesAttended}
-                        handleChange={(e) => setTimesAttended(e.target.value)}
-                      />
-                    </td>
-                  </tr>
-                );
-              })} */}
         </tbody>
       </TableContainer>
       {pagination}

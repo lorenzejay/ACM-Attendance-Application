@@ -12,3 +12,10 @@ table {
     padding: 15px;
   }
 }
+
+@media screen and (max-width: 600px) {
+  table {
+    display: flex;
+    flex-wrap: wrap;
+  }
+}
